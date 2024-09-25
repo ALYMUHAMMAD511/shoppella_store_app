@@ -47,6 +47,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
+      progressIndicator: const Center(child: CircularProgressIndicator(
+        color: Colors.white,
+        backgroundColor: Colors.red,
+      )),
       inAsyncCall: isLoading,
       child: Scaffold(
         appBar: AppBar(

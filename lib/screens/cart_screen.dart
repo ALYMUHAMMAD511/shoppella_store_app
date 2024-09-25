@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopella_store_app/models/cart_model.dart';
@@ -38,7 +39,13 @@ class CartScreen extends StatelessWidget {
               Navigator.pushNamed(context, ProductScreen.id, arguments: product);
             },
             child: ListTile(
-              leading: Image.network(product.image),
+              leading: CachedNetworkImage
+                (
+                imageUrl : product.image,
+                height: 85,
+                width: 85,
+                fit: BoxFit.fill,
+              ),
               title: Text(product.title),
               subtitle: Text('${product.price.toStringAsFixed(2)} \$'),
               trailing: IconButton(

@@ -45,6 +45,10 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
         ModalRoute.of(context)!.settings.arguments as ProductModel;
 
     return ModalProgressHUD(
+      progressIndicator: const Center(child: CircularProgressIndicator(
+        color: Colors.white,
+        backgroundColor: Colors.red,
+      )),
       inAsyncCall: isLoading,
       child: Scaffold(
         appBar: AppBar(
