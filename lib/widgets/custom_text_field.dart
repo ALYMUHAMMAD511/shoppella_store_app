@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
       this.prefixIcon,
       this.suffixIcon,
       this.suffixPressed,
+      this.controller,
       this.inputType});
 
   IconData? prefixIcon;
@@ -19,10 +20,12 @@ class CustomTextField extends StatelessWidget {
   Function(String)? onChanged;
   VoidCallback? suffixPressed;
   TextInputType? inputType;
+  TextEditingController? controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       cursorColor: Colors.red,
       onChanged: onChanged,
       obscureText: isPassword!,
@@ -47,11 +50,10 @@ class CustomTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
-          borderSide: const BorderSide(
-            color: Colors.red,
-          )
-        ),
+            borderRadius: BorderRadius.circular(5),
+            borderSide: const BorderSide(
+              color: Colors.red,
+            )),
         filled: true,
       ),
     );

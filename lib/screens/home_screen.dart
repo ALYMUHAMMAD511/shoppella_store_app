@@ -10,6 +10,9 @@ import 'package:shopella_store_app/screens/jewelery_screen.dart';
 import 'package:shopella_store_app/screens/men_clothing_screen.dart';
 import 'package:shopella_store_app/screens/women_clothing_screen.dart';
 import 'package:shopella_store_app/widgets/custom_app_bar_title.dart';
+import 'package:shopella_store_app/widgets/custom_text_field.dart';
+import '../models/product_model.dart';
+import '../services/get_all_products_service.dart';
 import 'all_products_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,24 +25,51 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   int currentIndex = 0;
-  List<Widget> screens =
-  [
-    const AllProductsScreen(),
-    ElectronicsScreen(),
-    JeweleryScreen(),
-    MenClothingScreen(),
-    WomenClothingScreen(),
-  ];
+  List<ProductModel> allProducts = [];
+  bool isLoading = true;
+  String searchQuery = '';
+  TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAllProducts();
+  }
+
+  Future<void> fetchAllProducts() async {
+    try {
+      List<ProductModel> products =
+          await GetAllProductsService().getAllProducts();
+      setState(() {
+        allProducts = products;
+        isLoading = false;
+      });
+    } catch (error) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  List<Widget> screens = [];
 
   @override
   Widget build(BuildContext context) {
+    screens = [
+      AllProductsScreen(products: allProducts, searchQuery: searchQuery),
+      // Pass search query
+      ElectronicsScreen(searchQuery: searchQuery),
+      // Pass search query
+      JeweleryScreen(searchQuery: searchQuery),
+      MenClothingScreen(searchQuery: searchQuery),
+      WomenClothingScreen(searchQuery: searchQuery),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: ()
-          {
+          onPressed: () {
             Navigator.pushNamed(context, AddProductScreen.id);
           },
           icon: Image.asset(
@@ -75,16 +105,45 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: screens[currentIndex],
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 25, right: 16, left: 16),
+            child: CustomTextField(
+              controller: searchController,
+              hint: 'Search a Product',
+              onChanged: (value) {
+                setState(() {
+                  searchQuery = value;
+                });
+              },
+              prefixIcon: Icons.search,
+            ),
+          ),
+          isLoading
+              ? const Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.red,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              : Expanded(
+                  child: screens[currentIndex], // Show selected category screen
+                ),
+        ],
+      ),
       bottomNavigationBar: SalomonBottomBar(
         backgroundColor: Colors.white.withOpacity(0.8),
         selectedItemColor: Colors.red,
         unselectedItemColor: Colors.black,
         currentIndex: currentIndex,
-        onTap: (int index)
-        {
+        onTap: (int index) {
           setState(() {
             currentIndex = index;
+            searchQuery = '';
+            searchController.clear();
           });
         },
         items: [
@@ -93,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: const Text(
               'Home',
               style: TextStyle(
-                fontSize: 9.5,
+                fontSize: 9,
               ),
             ),
           ),
@@ -102,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: const Text(
               'Electronics',
               style: TextStyle(
-                fontSize: 9.5,
+                fontSize: 9,
               ),
             ),
           ),
@@ -111,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: const Text(
               'Jewelery',
               style: TextStyle(
-                fontSize: 9.5,
+                fontSize: 9,
               ),
             ),
           ),
@@ -120,15 +179,13 @@ class _HomeScreenState extends State<HomeScreen> {
             title: const Text(
               'Men\'s Clothing',
               style: TextStyle(
-                fontSize: 9.5,
+                fontSize: 9,
               ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
           ),
           SalomonBottomBarItem(
             icon: SvgPicture.asset(
-                'assets/images/dress_icon.svg',
+              'assets/images/dress_icon.svg',
               height: 22,
               width: 22,
             ),
@@ -137,8 +194,6 @@ class _HomeScreenState extends State<HomeScreen> {
               style: TextStyle(
                 fontSize: 9,
               ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],

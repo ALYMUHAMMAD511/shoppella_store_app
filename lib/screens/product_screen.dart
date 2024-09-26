@@ -68,7 +68,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         const CircularProgressIndicator(),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
-                    fit: BoxFit.fill,
+                    fit: BoxFit.contain,
                     height: 300,
                     width: double.infinity,
                   ),
