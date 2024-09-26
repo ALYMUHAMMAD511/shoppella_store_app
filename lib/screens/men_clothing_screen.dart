@@ -76,7 +76,7 @@ class _MenClothingScreenState extends State<MenClothingScreen> {
                   right: 16,
                 ),
                 child: GridView.builder(
-                  padding: const EdgeInsets.only(top: 60),
+                  padding: const EdgeInsets.only(top: 75),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 1.15,

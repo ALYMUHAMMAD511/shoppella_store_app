@@ -50,7 +50,12 @@ class _JeweleryScreenState extends State<JeweleryScreen> {
     }).toList();
 
     if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(
+          child: CircularProgressIndicator(
+            color: Colors.white,
+            backgroundColor: Colors.red,
+          ),
+      );
     } else if (filteredProducts.isEmpty) {
       return const Center(child: Text('No products found'));
     }

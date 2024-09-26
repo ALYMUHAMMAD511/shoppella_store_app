@@ -48,7 +48,10 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
     }).toList();
 
     if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator(
+        color: Colors.white,
+        backgroundColor: Colors.red,
+      ),);
     } else if (filteredProducts.isEmpty) {
       return const Center(child: Text('No products found'));
     }
@@ -56,7 +59,7 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
     return Padding(
       padding: const EdgeInsets.only(top: 30, left: 16, right: 16),
       child: GridView.builder(
-        padding: const EdgeInsets.only(top: 40),
+        padding: const EdgeInsets.only(top: 65),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 1.08,

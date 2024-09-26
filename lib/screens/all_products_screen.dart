@@ -28,7 +28,7 @@ class AllProductsScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 30, left: 16, right: 16),
       child: GridView.builder(
-        padding: const EdgeInsets.only(top: 40),
+        padding: const EdgeInsets.only(top: 65),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 1.08,
