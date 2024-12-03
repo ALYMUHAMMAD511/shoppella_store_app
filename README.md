@@ -1,16 +1,3 @@
-# shopella_store_app
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![shop 1](https://github.com/user-attachments/assets/96339d2a-4b41-4247-8a12-e640dabcb6d0)
+![shop 2](https://github.com/user-attachments/assets/8c6c197e-6448-4764-a028-400a8b70fefa)
+![shop 3](https://github.com/user-attachments/assets/f00fdc40-8bee-4c2e-8b85-38becd5fd80e)
